@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option go_package = "github.com/BingguWang/hystrix-study/grpc_test/server/proto";
+// github.com/BingguWang/grpc-go-study是go mod跟路径， 生成的文件会放在/scoreService/proto下
+
+package proto;
+
+message Score {
+  uint32 type = 1;
+  int32 value = 2;
+
+}
+
+message AddScoreByUserIDResp{
+  uint64 userID = 1;
+}
+
+message AddScoreByUserIDReq{
+  uint64 userID = 1;
+  repeated Score scores = 2;
+}
+
+service ScoreService{
+  rpc AddScoreByUserID(AddScoreByUserIDReq) returns (AddScoreByUserIDResp) {  }  // 这种是一元的RPC通信
+}
